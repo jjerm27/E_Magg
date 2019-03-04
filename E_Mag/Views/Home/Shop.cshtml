@@ -1,0 +1,80 @@
+﻿@model E_Mag.Models.PagedViewModel
+@using E_Mag.Helpers;
+@using E_Mag.Models;
+
+@{
+    ViewBag.Title = "Shop | E-Shopper";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("Advertaisment_Part")
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    @Html.Partial("Categories_part")
+                    @Html.Partial("Brands_part")
+                    @Html.Partial("PriceRange_Partial")
+                    @Html.Partial("Shipping_Part")
+                </div>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Сегодняшнее предложение</h2>
+
+                    @foreach (var p in Model.ProductsPaged)
+                    {
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="@p.Img" alt="" />
+                                        <h2>@p.Price</h2>
+                                        <p>@p.Info</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
+                                    </div>
+                                    <div class="product-overlay">
+                                        <div class="overlay-content">
+                                            <h2>@p.Price</h2>
+                                            <p>@p.Info</p>
+
+                                            @using (Ajax.BeginForm("AddToCart", new AjaxOptions { }))
+                                            {
+                                                <input type="hidden" name="Id" value="@p.ProductId" />
+                                                <input type="submit" class="btn btn-default add-to-cart" value="Добавить в корзину" />
+
+                                            }
+
+                                        </div>
+                                        @if (p.IsNew)
+                                        {
+                                            <img src="~/Content/images/home/new.png" class="new" alt="" />
+                                        }
+
+                                        @if (p.IsSale)
+                                        {
+                                            <img src="~/Content/images/home/sale.png" class="new" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Добавить в желания</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Сравнить</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <ul class="pagination">
+                        @Html.PageLinks(Model.PageInfo, x => Url.Action("Shop", new { page = x }))
+                    </ul>
+                </div>                                  
+            </div>
+        </div>
+    </div>
+</section>
+
+

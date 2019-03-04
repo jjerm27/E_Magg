@@ -1,0 +1,11 @@
+﻿<div class="brands_products">
+    <h2>Бренды</h2>
+    <div class="brands-name">
+        <ul class="nav nav-pills nav-stacked">
+            @foreach(var item in ViewBag.brands)
+            {
+                <li><a href="#"> <span class="pull-right">(@item.Products.Count)</span>@item.BrandName</a></li>
+            }           
+        </ul>
+    </div>
+</div>

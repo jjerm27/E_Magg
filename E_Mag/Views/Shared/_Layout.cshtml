@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - E Mag</title>
+    @Scripts.Render("~/bundles/modernizr")
+   
+
+</head>
+<body>
+    <header id="header">
+        @Html.Partial("Header_top_part")
+        @Html.Partial("Header_middle_part")
+        @Html.Partial("Header_bottom_part")
+    </header>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    <footer id="footer">
+        @Html.Partial("Footer_top_part")
+        @Html.Partial("Footer_widget_part")
+        @Html.Partial("Footer_bottom_part")
+    </footer>
+
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/shopscripts")
+    @Styles.Render("~/Content/shopcss")
+</body>
+
+</html>

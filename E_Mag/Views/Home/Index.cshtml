@@ -1,0 +1,30 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Home | E-Shopper";
+    ViewBag.Description = "My description";
+    ViewBag.Keywords = "Desk,desk,desk";
+}
+
+@Html.Partial("Slider_part")
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    @Html.Partial("Categories_part")
+                    @Html.Partial("Brands_part")
+                    @Html.Partial("PriceRange_Partial")
+                    @Html.Partial("Shipping_Part")
+
+                </div>
+            </div>
+            <div class="col-sm-9 padding-right">
+                @Html.Partial("FeaturesItems_Part")
+                @Html.Partial("CategoryTab_Part")
+                @Html.Partial("Recommend_Part")
+            </div>
+        </div>
+    </div>
+</section>
+
