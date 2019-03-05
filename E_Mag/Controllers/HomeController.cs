@@ -276,8 +276,10 @@ namespace E_Mag.Controllers
                 GetCart().Clear();               
             }
 
-            var script = "window.location ='" + Url.Action("ShowOrder", "Home") + "' ;";
-            return JavaScript(script);
+            //var script = "window.location ='" + Url.Action("ShowOrder", "Home") + "' ;";
+            //return JavaScript(script);
+
+            return View("ShowOrder", db.Orders.OrderByDescending(o => o.OrderId).FirstOrDefault());
            
         }
        
