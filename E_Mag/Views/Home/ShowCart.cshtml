@@ -64,7 +64,7 @@ else
 
                                         @Ajax.ActionLink(" + ", "AddToCartPlus", "Home", new { id = i.Product.ProductId }, new AjaxOptions { HttpMethod = "Post", OnComplete = "add_to_cart_complete" }, new { @class = "cart_quantity_up" })
 
-                                        <input class="cart_quantity_input" type="text" name="quantity" value=@i.Quantity autocomplete="off" size="2" id=@mInp>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value=@i.Quantity autocomplete="off" size="2" id=@mInp readonly>
 
                                         @Ajax.ActionLink(" - ", "RemoveFromCartMinus", "Home", new { id = i.Product.ProductId }, new AjaxOptions { HttpMethod = "Post", OnComplete = "remove_from_cart_minus" }, new { @class = "cart_quantity_down" })
 

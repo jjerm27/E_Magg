@@ -15,7 +15,28 @@ namespace E_Mag.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
-        [AllowAnonymous]
+        [OutputCache(CacheProfile = "cacheCategory", VaryByHeader = "user-agent")]
+        private List<Category> GetCategories()
+        {   
+            var cats = db.Categories.Take(10).ToList();
+            return cats;
+        }
+
+        [OutputCache(CacheProfile = "cacheProduct", VaryByHeader = "user-agent")]
+        private List<Product> GetProducts()
+        {
+            var products = db.Products.Take(6).ToList();
+            return products;
+        }
+
+        [OutputCache(CacheProfile = "cacheCategory", VaryByHeader = "user-agent")]
+        private List<Brand> GetBrands()
+        {
+            var brands = db.Brands.Take(7).ToList();
+            return brands;
+        }
+
+        [AllowAnonymous]       
         public ActionResult Index()
         {
             #region adding data in database
@@ -130,17 +151,17 @@ namespace E_Mag.Controllers
             //db.Brands.Add(br);
             //db.SaveChanges();
             #endregion
-           
-            var cats = db.Categories.Take(10).ToList();
+
+            var cats = GetCategories();
             if (cats != null)
                 ViewBag.cats = cats;
-            var brands = db.Brands.Take(7).ToList();
+            var brands = GetBrands();
             if (brands != null)
                 ViewBag.brands = brands;
-            var products = db.Products.Take(6).ToList();           
+            var products = GetProducts();           
             if (products != null)
                 ViewBag.products = products;
-            var category = db.Categories.Where(i => i.Products.Count > 0).Take(6).ToList();
+            var category = GetCategories().Where(i => i.Products.Count > 0).Take(6).ToList();
             if (category != null)
                 ViewBag.categoriList = category;                 
             return View();
@@ -148,10 +169,10 @@ namespace E_Mag.Controllers
 
         public ActionResult Shop(int page = 1)
         {
-            var cats = db.Categories.Take(10).ToList();
+            var cats = GetCategories();
             if (cats != null)
                 ViewBag.cats = cats;
-            var brands = db.Brands.Take(7).ToList();
+            var brands = GetBrands();
             if (brands != null)
                 ViewBag.brands = brands;
             
